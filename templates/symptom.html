@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardionexus - Patient Symptoms</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #0066cc; /* Blue background */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .wrapper {
+        width: 90%;
+        max-width: 1000px;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #458bd2;
+        color: #fff;
+        padding: 20px;
+        text-align: left;
+        font-size: 24px;
+        font-weight: bold;
+        border-bottom: 5px solid #004a99;
+      }
+      .container {
+        display: flex;
+      }
+      .container img {
+        width: 50%;
+        object-fit: cover;
+        border-radius: 0 0 0 15px;
+      }
+      .form-section {
+        width: 50%;
+        padding: 40px;
+      }
+      h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .symptom {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .symptom label {
+        margin-right: 10px;
+        flex-grow: 1;
+        font-weight: bold;
+      }
+      .symptom-options {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Space between Yes and No options */
+      }
+      .symptom input[type="radio"] {
+        margin-right: 5px;
+        transform: scale(1.5); /* Increase the size of the radio buttons */
+      }
+      .other-details {
+        margin-top: 20px;
+      }
+      .other-details label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+      .other-details textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: none;
+      }
+      input[type="submit"] {
+        width: 20%;
+        padding: 12px;
+        background-color: #0066cc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      input[type="submit"]:hover {
+        background-color: #005bb5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">CARDIONEXUS</div>
+      <div class="container">
+        <div class="form-section">
+          <h2>Patient ID: {{P_id}}</h2>
+          <h2>Patient Name: {{P_Name}}</h2>
+          <h2>Enter Symptoms</h2>
+          <form id="symptomsForm" action="/predict_symptoms" method="POST">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            
+            <h3>Symptoms</h3>
+            
+            <div class="form-group">
+                <input type="checkbox" id="Heart_Block_Failure" name="Heart Block/Failure" value="1">
+                <label for="Heart_Block_Failure">Heart Block/Failure</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="Shortness_of_Breath" name="Shortness of Breath" value="1">
+                <label for="Shortness_of_Breath">Shortness of Breath</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="Chest_Pain" name="Chest Pain" value="1">
+                <label for="Chest_Pain">Chest Pain</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="Fatigue" name="Fatigue" value="1">
+                <label for="Fatigue">Fatigue</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="Dizziness" name="Dizziness" value="1">
+                <label for="Dizziness">Dizziness</label>
+            </div>
+            <div class="other-details">
+              <label for="otherSymtoms">Enter other details:</label>
+              <textarea
+                id="otherSymtoms"
+                name="otherSymtoms"
+                rows="4"
+              ></textarea>
+            </div>
+    
+            <input type="submit" value="Submit">
+        
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script>
+      document.getElementById("symptomsForm").onsubmit = function (event) {
+        event.preventDefault();
+
+        // Define symptoms that must be answered
+        const symptoms = ["symptom1", "symptom2", "symptom3"];
+        let allSelected = true;
+
+        // Check if each symptom field has been answered
+        symptoms.forEach((symptom) => {
+          const selected = document.querySelector(
+            `input[name="${symptom}"]:checked`
+          );
+          if (!selected) {
+            allSelected = false;
+          }
+        });
+
+        // Redirect if all symptoms are answered
+        if (allSelected) {
+          window.location.href = "Dashboard.html"; // Redirect to dashboard.html
+        } else {
+          alert("Please answer all symptoms before submitting.");
+        }
+      };
+    </script> -->
+  </body>
+</html>

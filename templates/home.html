@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Support</title>
+    <style>
+      /* General styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #ffffff; /* White background for the whole page */
+        color: #002366; /* Dark blue text color */
+      }
+
+      /* Enable smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Navigation bar styles */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background-color: #ffffff; /* White background for the navbar */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        animation: fadeIn 1s ease-in; /* Fade-in animation */
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Space between logo image and text */
+      }
+
+      .logo-img {
+        max-height: 80px; /* Adjust as needed */
+        width: auto;
+      }
+
+      .logo-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #003399; /* Dark blue color for the text */
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #003399; /* Dark blue text color for navbar links */
+        font-size: 18px;
+        transition: color 0.3s, transform 0.3s;
+      }
+
+      .nav-links li a:hover {
+        color: #87ceeb; /* Light blue color on hover */
+        transform: scale(1.1); /* Slightly enlarge on hover */
+      }
+
+      .signup-btn {
+        padding: 10px 20px;
+        background-color: #87ceeb; /* Light blue background for the Sign-Up button */
+        color: #003366; /* Dark blue text color for the button */
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .signup-btn:hover {
+        background-color: #ffffff;
+        color: #003399; /* Dark blue text color for hover */
+        transform: scale(1.05); /* Slightly enlarge on hover */
+      }
+
+      /* Main container styles */
+      .container {
+        background-color: #87ceeb; /* Light blue background for the container */
+        padding: 40px;
+        margin: 20px auto; /* Center the container */
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        max-width: 1200px; /* Limit the width of the container */
+        animation: fadeIn 1s ease-in; /* Fade-in animation */
+      }
+
+      /* Main content styles */
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: slideIn 0.8s ease-out; /* Slide-in animation */
+      }
+
+      .text-section {
+        max-width: 500px;
+      }
+
+      .text-section h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #002366; /* Dark blue for the main heading */
+      }
+
+      .text-section p {
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #002366; /* Dark blue for the paragraph text */
+      }
+
+      .read-more-btn {
+        padding: 12px 24px;
+        background-color: #003399; /* Dark blue for the Read More button */
+        color: #ffffff; /* White text color for the button */
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .read-more-btn:hover {
+        background-color: #ffffff;
+        color: #003399; /* Dark blue text color for hover */
+        transform: scale(1.05); /* Slightly enlarge on hover */
+      }
+
+      .image-section {
+        max-width: 500px;
+      }
+
+      .illustration {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in; /* Fade-in animation */
+      }
+
+      .about-section h2 {
+        font-size: 40px;
+        margin-bottom: 40px;
+        color: #002366; /* Dark blue for headings */
+        text-align: center;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .about-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background-color: #f0f8ff; /* Light blue background for each item */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        animation: slideIn 0.8s ease-out; /* Slide-in animation */
+      }
+
+      .about-img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      }
+
+      .about-description h3 {
+        font-size: 24px;
+        color: #003399; /* Dark blue for subheadings */
+        margin-bottom: 10px;
+      }
+
+      .about-description p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #002366; /* Dark blue for text */
+      }
+
+      /* Contact Section */
+      .contact-section {
+        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in; /* Fade-in animation */
+      }
+
+      .contact-section h2 {
+        font-size: 40px;
+        margin-bottom: 40px;
+        color: #002366; /* Dark blue for headings */
+        text-align: center;
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .contact-item {
+        padding: 20px;
+        background-color: #f0f8ff; /* Light blue background for each item */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        text-align: center;
+        animation: slideIn 0.8s ease-out; /* Slide-in animation */
+      }
+
+      .contact-item h3 {
+        font-size: 24px;
+        color: #003399; /* Dark blue for names */
+        margin-bottom: 10px;
+      }
+
+      .contact-item p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #002366; /* Dark blue for contact details */
+      }
+
+      /* Keyframes for animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="/static/logo1.png" alt="Logo" class="logo-img" />
+          <span class="logo-text">CARDIONEXUS</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html" class="signup-btn">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Main Content -->
+      <main class="content">
+        <div class="text-section">
+          <h1>Medical Support</h1>
+          <p>
+            This is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout.
+          </p>
+          <a href="#" class="read-more-btn">Read More</a>
+        </div>
+        <div class="image-section">
+          <img src="/static/doc.png" alt="Doctor and patient" class="illustration" />
+        </div>
+      </main>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <h2>About Us</h2>
+      <div class="about-content">
+        <!-- Patient Symptom Analysis -->
+        <div class="about-item">
+          <img
+            src="/static/Symptom.png"
+            alt="Patient Symptom Analysis"
+            class="about-img"
+          />
+          <div class="about-description">
+            <h3>Patient Symptom Analysis</h3>
+            <p>
+              We provide a comprehensive analysis of patient symptoms to ensure
+              accurate diagnosis and personalized treatment plans.
+            </p>
+          </div>
+        </div>
+
+        <!-- Patient Report Collection -->
+        <div class="about-item">
+          <img
+            src="/static/Report_collection.png"
+            alt="Patient Report Collection"
+            class="about-img"
+          />
+          <div class="about-description">
+            <h3>Patient Report Collection</h3>
+            <p>
+              Our system facilitates the efficient collection of patient
+              reports, ensuring timely and accurate data management.
+            </p>
+          </div>
+        </div>
+
+        <!-- Report Maintenance -->
+        <div class="about-item">
+          <img
+            src="/static/report_maintenance.jpg"
+            alt="Report Maintenance"
+            class="about-img"
+          />
+          <div class="about-description">
+            <h3>Report Maintenance</h3>
+            <p>
+              We maintain patient reports securely, ensuring they are easily
+              accessible for future reference and analysis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Prediction & Precautions -->
+        <div class="about-item">
+          <img
+            src="/static/predict.png"
+            alt="Prediction & Precautions"
+            class="about-img"
+          />
+          <div class="about-description">
+            <h3>Prediction & Precautions</h3>
+            <p>
+              Using advanced algorithms, we predict potential health risks and
+              provide precautionary measures to prevent them.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <h2>Contact Us</h2>
+      <ul class="contact-list">
+        <!-- Contact 1 -->
+        <li class="contact-item">
+          <h3>Dr. Shiva</h3>
+          <p>Email: Shivan@gmail.com</p>
+          <p>Phone: (+91) 9443413625</p>
+        </li>
+
+        <!-- Contact 2 -->
+        <li class="contact-item">
+          <h3>Dr. Lavanya</h3>
+          <p>Email: Lavanya@gmail.com</p>
+          <p>Phone: (+91) 8754939475</p>
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>

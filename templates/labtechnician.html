@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient's Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0066cc, #ffffff);
+        }
+
+        .container {
+            width: 350px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container img {
+            width: 200px; /* Adjusted to medium size */
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .input-container {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .input-container label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .input-container input[type="text"],
+        .dropdown-container {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            background-color: #f5f5f5;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-container input[type="text"]:focus,
+        .dropdown-container:focus-within {
+            border-color: #0066cc;
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.2);
+        }
+
+        .dropdown-container {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .dropdown-container::after {
+            content: '\25BC';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .dropdown-container.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .dropdown-menu input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0066cc;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #005bb5;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="/static/LT.jpeg" alt="User Icon">
+        <h1>Patient's Login</h1>
+        <form action="/predict_report" method="post">
+            <div class="input-container">
+                <label for="patient-name">Patient Name:</label>
+                <input type="text" id="patientName" name="patientName" required>
+            </div>
+            <div class="input-container">
+                <label for="patient-id">Patient ID:</label>
+                <input type="text" id="patient-id" name="patient-id" required>
+            </div>
+            <div class="input-container">
+                <label for="test-report">Select Test Reports:</label>
+                <div class="dropdown-container" id="test-report">
+                    <span>Select Reports</span>
+                    <div class="dropdown-menu">
+                        <label><input type="checkbox" name="report" value="ar">Lipid Profile Test</label>
+                        <label><input type="checkbox" name="report" value="hrt-atk">Cardiac Biomarkers Test</label>
+                        <label><input type="checkbox" name="report" value="hyp-ten">Blood Pressure Test</label>
+                        <label><input type="checkbox" name="report" value="stroke">Stroke</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+
+    <!-- <script>
+        const dropdownContainer = document.querySelector('.dropdown-container');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        const checkboxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+        const dropdownText = dropdownContainer.querySelector('span');
+
+        dropdownContainer.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!dropdownContainer.contains(e.target)) {
+                dropdownContainer.classList.remove('active');
+            }
+        });
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const selectedReports = Array.from(checkboxes)
+                    .filter(i => i.checked)
+                    .map(i => i.value)
+                    .join(', ') || 'Select Reports';
+                dropdownText.textContent = selectedReports;
+            });
+        });
+    </script> -->
+    <script>
+        const dropdownContainer = document.querySelector('.dropdown-container');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        const checkboxes = document.querySelectorAll('.dropdown-menu input[type="checkbox"]');
+        const dropdownText = dropdownContainer.querySelector('span');
+    
+        dropdownContainer.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    
+        document.addEventListener('click', function (e) {
+            if (!dropdownContainer.contains(e.target)) {
+                dropdownContainer.classList.remove('active');
+            }
+        });
+    
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                // Uncheck all other checkboxes when one is checked
+                if (this.checked) {
+                    checkboxes.forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+    
+                // Update the dropdown text to reflect the selected report
+                const selectedReport = Array.from(checkboxes)
+                    .find(i => i.checked)?.value || 'Select Reports';
+                dropdownText.textContent = selectedReport;
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

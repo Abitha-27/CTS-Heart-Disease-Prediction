@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      /* General styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Header styles */
+      header {
+        background-color: #0066cc; /* Blue background */
+        color: #fff;
+        padding: 20px;
+        position: relative;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 60px; /* Adjust size as needed */
+        height: auto;
+        margin-right: 15px;
+      }
+
+      .logo span {
+        font-size: 24px; /* Larger font size for logo name */
+        font-weight: bold;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 28px; /* Larger font size for header title */
+        text-align: center;
+        flex-grow: 1;
+      }
+
+      /* Dashboard container styles */
+      .dashboard-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(
+          100vh - 80px
+        ); /* Adjusted to accommodate larger header height */
+        padding: 20px;
+      }
+
+      .dashboard-container img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">
+          <img src="/static/logo.png" alt="Logo" />
+          <span>Cardionexus</span>
+        </div>
+        <h1>Patient Details</h1>
+      </div>
+    </header>
+
+    <div class="dashboard-container">
+      <!-- <img src="/static/hero-_main_image_3.png" alt="Dashboard Image" /> -->
+       <div>
+          {{disease_name}}
+       </div>
+    </div>
+  </body>
+</html>

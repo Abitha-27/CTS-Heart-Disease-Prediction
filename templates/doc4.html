@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardionexus - Generate Patient ID</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #a5e2ff;
+        margin: 0;
+        padding: 0;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 15px;
+        background-color: #ffffff;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        animation: slideDown 1s ease-out;
+      }
+
+      .header-bar h1 {
+        color: #05217a;
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .notification-icon-container {
+        display: flex;
+        align-items: center;
+        background-color: #f0f0f0;
+        padding: 3px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .notification-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .profile-image {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+      }
+
+      .user-details p {
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      .user-details p:first-child {
+        font-weight: bold;
+      }
+
+      .main-container {
+        width: 95%;
+        margin: 20px auto;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 20px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .welcome-banner {
+        background-color: #f9f9f9;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+
+      .welcome-text {
+        color: #000;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        animation: moveFromLeft 3s ease-in-out forwards;
+      }
+
+      @keyframes moveFromLeft {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+          text-align: center;
+        }
+      }
+
+      .subtext {
+        font-size: 14px;
+        color: #555;
+        text-align: center;
+      }
+
+      .doctor-image {
+        width: 120px;
+        height: auto;
+      }
+
+      .generate-id {
+        width: 20%;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 1s ease-in-out;
+        margin: 0 auto;
+      }
+
+      .generate-id h2 {
+        margin-bottom: 20px;
+      }
+
+      .generate-id form {
+        text-align: center;
+        animation: slideUp 1s ease-out;
+      }
+
+      .generate-id label {
+        display: inline-block;
+        margin-bottom: 5px;
+        width: 30%;
+        vertical-align: middle;
+      }
+
+      .generate-id input[type="text"] {
+        width: 50%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        vertical-align: middle;
+        display: inline-block;
+        transition: border-color 0.3s;
+      }
+
+      .generate-id input[type="text"]:focus {
+        border-color: #007bff;
+        animation: pulse 0.5s ease-out;
+      }
+
+      .generate-id input[type="submit"],
+      button {
+        width: 50%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .generate-id input[type="submit"]:hover,
+      button:hover {
+        background-color: #a5e2ff;
+        transform: translateY(-3px);
+      }
+
+      #generatedId {
+        margin-top: 20px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        0% {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-bar">
+      <h1>CARDIONEXUS</h1>
+      <div class="user-info">
+        <div class="notification-icon-container">
+          <img
+            src="/static/images (1).png"
+            alt="Notification"
+            class="notification-icon"
+          />
+        </div>
+        <img src="/static/images.png" alt="User Profile" class="profile-image" />
+        <div class="user-details">
+          <p id="username">{{username}}</p>
+          <p id="useremail">{{email}}</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-container">
+      <div class="welcome-banner">
+        <div class="welcome-text" id="welcomeText"></div>
+      </div>
+
+      <!-- Generate Patient ID section -->
+      <div class="generate-id">
+        <h2>Enter Patient Name</h2>
+        <form id="generateForm" action="/symptom.html" method="post">
+          <label for="patientName">Patient Name:</label>
+          <input type="text" id="patientName" name="patientName" required />
+          <label for="patientPhoneNo">Phone No:</label>
+          <input type="text" id="patientPhoneNo" name="patientPhoneNo" required />
+          <input type="submit" value="Generate ID" />
+        </form>
+        <!-- <button id="goToSymptoms" style="display: none">
+          Go to Symptoms Page
+        </button>
+        <p id="generatedId"></p> -->
+      </div>
+    </div>
+
+    <!-- <script>
+      // Retrieve user details from localStorage
+      document.getElementById("username").innerText =
+        localStorage.getItem("userName") || "User Name";
+      document.getElementById("useremail").innerText =
+        localStorage.getItem("userEmail") || "User Email";
+
+      // Set welcome name
+      const welcomeName = localStorage.getItem("userName") || "Dr. Joe";
+      const welcomeTextElement = document.getElementById("welcomeText");
+      const welcomeMessage = "Welcome, " + welcomeName + "!";
+
+      // Set the welcome message
+      welcomeTextElement.textContent = welcomeMessage;
+
+      // Handle form submission and ID generation
+      document.getElementById("generateForm").onsubmit = function (event) {
+        event.preventDefault(); // Prevent form submission
+        const patientName = document.getElementById("patientName").value;
+        const uniqueId =
+          patientName.substring(0, 3).toUpperCase() +
+          Math.floor(1000 + Math.random() * 9000);
+
+        // Save generated ID in localStorage
+        localStorage.setItem("patientId", uniqueId);
+
+        // Display the generated ID and show the button to go to the symptoms page
+        document.getElementById("generatedId").innerText =
+          "Generated Patient ID: " + uniqueId;
+        document.getElementById("goToSymptoms").style.display = "block";
+      };
+
+      document.getElementById("goToSymptoms").onclick = function () {
+        window.location.href = "symptom.html";
+      };
+    </script> -->
+  </body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardionexus - Generate Patient ID</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #a5e2ff, #e3f7ff);
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px; /* Reduced padding */
+        background-color: #ffffff;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: slideDown 1s ease-out;
+      }
+
+      .header-bar h1 {
+        color: #007bff;
+        margin: 0;
+        font-size: 24px; /* Reduced font size */
+        font-weight: bold;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, color 0.3s;
+      }
+
+      .header-bar h1:hover {
+        transform: scale(1.05);
+        color: #0056b3;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        font-size: 12px; /* Reduced font size */
+      }
+
+      .notification-icon-container {
+        display: flex;
+        align-items: center;
+        background-color: #e0f7fa;
+        padding: 5px;
+        border-radius: 50%;
+        margin-right: 15px;
+        transition: background-color 0.3s, transform 0.3s;
+        cursor: pointer;
+      }
+
+      .notification-icon-container:hover {
+        background-color: #b2ebf2;
+        transform: scale(1.1);
+      }
+
+      .notification-icon {
+        width: 18px; /* Reduced width */
+        height: 18px; /* Reduced height */
+      }
+
+      .profile-image {
+        width: 40px; /* Reduced width */
+        height: 40px; /* Reduced height */
+        border-radius: 50%;
+        margin-right: 10px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+
+      .profile-image:hover {
+        transform: scale(1.1);
+      }
+
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .user-details p {
+        margin: 0;
+        line-height: 1.2;
+        color: #333;
+      }
+
+      .user-details p:first-child {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      .main-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 30px auto;
+        background-color: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .main-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .welcome-banner {
+        background: url("image1.jpeg") no-repeat center center/cover;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin: 20px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        height: 150px;
+      }
+
+      .welcome-text {
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        animation: moveFromLeft 2s ease-in-out forwards;
+      }
+
+      @keyframes moveFromLeft {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .generate-id {
+        width: 100%;
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 1s ease-in-out;
+        margin: 0 auto;
+      }
+
+      .generate-id h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .generate-id form {
+        width: 100%;
+        position: relative;
+        text-align: center;
+      }
+
+      .generate-id label {
+        display: block;
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 5px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .generate-id input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s, transform 0.3s;
+        padding-top: 20px;
+        font-size: 16px;
+        display: block;
+        text-align: left;
+      }
+
+      .generate-id input[type="text"]:focus {
+        border-color: #007bff;
+        outline: none;
+        transform: scale(1.02);
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      .generate-id input[type="text"]:focus + label {
+        top: -20px;
+        font-size: 12px;
+        color: #007bff;
+      }
+
+      .generate-id input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #007bff, #00bfff);
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+      }
+
+      .generate-id input[type="submit"]:hover {
+        background: linear-gradient(135deg, #0056b3, #007bff);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      #generatedId {
+        margin-top: 20px;
+        animation: fadeIn 1.5s ease-in-out;
+        color: #0041da; /* Black color for ID number */
+        font-weight: bold;
+        font-size: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        display: none; /* Initially hide the ID */
+      }
+
+      .generated-id-label {
+        color: #007bff; /* Blue color for "Generated Patient ID" */
+        font-size: 16px;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translateY(100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-bar">
+      <h1>CARDIONEXUS</h1>
+      <div class="user-info">
+        
+        
+        <div class="user-details">
+          <p>{{username}}</p>
+          <p>{{email}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="welcome-banner">
+        <div id="welcomeText" class="welcome-text">Hi, Dr.{{username}}</div>
+      </div>
+
+      <div class="generate-id">
+        <h2>Generate Patient ID</h2>
+        <form id="generateForm" action="/symptom.html" method="post">
+          <label for="patientName">Patient Name:</label>
+          <input type="text" id="patientName" name="patientName" required />
+          <label for="patientPhoneNo">Phone No:</label>
+          <input type="text" id="patientPhoneNo" name="patientPhoneNo" required />
+          <input type="submit" value="Generate ID" />
+        </form>
+
+        <div class="generated-id-label"></div>
+        <div id="generatedId"></div>
+      </div>
+    </div>
+
+    <!-- <script>
+      function generatePatientId() {
+        const prefix = "PNT";
+        const uniqueNumber = Math.floor(100000 + Math.random() * 900000);
+        return prefix + uniqueNumber;
+      }
+
+      function displayGeneratedId() {
+        const generatedIdElement = document.getElementById("generatedId");
+        const patientId = generatePatientId();
+        generatedIdElement.textContent = `Generated ID: ${patientId}`;
+        generatedIdElement.style.display = "block"; // Show the ID after generation
+      }
+
+      document
+        .getElementById("generateIdForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          displayGeneratedId();
+        });
+
+      function displayWelcomeMessage() {
+        const welcomeTextElement = document.getElementById("welcomeText");
+        const username = "Dr. John Doe";
+        let text = "Welcome, " + username;
+
+        welcomeTextElement.innerHTML = text;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        displayWelcomeMessage();
+      });
+    </script> -->
+  </body>
+</html>

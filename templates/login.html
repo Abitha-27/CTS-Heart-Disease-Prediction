@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardionexus Login</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ffffff, #69b3e7);
+        /* Background gradient from white to blue */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container {
+        display: flex;
+        background: #ffffff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        width: 100%;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .login-box {
+        width: 40%;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #004080, #69b3e7);
+        /* Gradient for the left side */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        animation: slideInFromLeft 1s ease-out;
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .login-box .logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .login-box .logo img {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+      }
+
+      .login-box .logo h2 {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      .login-box h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        font-weight: 400;
+        color: white;
+        font-size: 24px;
+      }
+
+      .login-box label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #f5f5f5;
+        font-size: 14px;
+      }
+
+      .login-box input[type="text"],
+      .login-box input[type="password"],
+      .login-box select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        font-size: 14px;
+        background-color: #f5f5f5;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      .login-box input[type="text"]:focus,
+      .login-box input[type="password"]:focus,
+      .login-box select:focus {
+        border-color: #007bff;
+        background-color: #fff;
+      }
+
+      .login-box input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      .login-box input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      .login-box .terms {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .login-box .terms input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      .login-box .terms label {
+        font-weight: normal;
+        color: #333;
+      }
+
+      .login-box .terms a {
+        color: #0056b3;
+        text-decoration: none;
+      }
+
+      .login-box .terms a:hover {
+        text-decoration: underline;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .login-link a {
+        color: #0056b3;
+        text-decoration: none;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      .image-container {
+        width: 60%;
+        background: white;
+        /* White background for the right side */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        animation: fadeIn 1s ease-out;
+      }
+
+      .image-container .cardionexus-info {
+        position: absolute;
+        top: 20px; /* Keeps it near the top */
+        left: 50%;
+        transform: translateX(-50%);
+        color: #002c6e;
+        font-size: 2rem; /* Increased font size */
+        font-weight: bold; /* Bold text */
+        text-align: center;
+      }
+
+      .image-container img {
+        width: 90%; /* Adjusted width for larger image */
+        height: auto;
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .image-container img:hover {
+        transform: scale(1.05); /* Zoom effect on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-box">
+        <div class="logo">
+          <img src="/static/logo.png" alt="WeHealth Logo" />
+          <h2>CARDIONEXUS</h2>
+        </div>
+        <h2>Login to your account</h2>
+        <form id="loginForm" action="/login" method="post">
+          <label for="role">Select Role:</label>
+          <select id="role" name="role" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="lab-technician">Lab Technician</option>
+            <option value="doctor">Doctor</option>
+          </select>
+          <label for="text">Name:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <input type="submit" value="Login" />
+          <div class="login-link">
+            Don't have an account?
+            <a href="Signup.html">Sign Up</a>
+          </div>
+        </form>
+      </div>
+      <div class="image-container">
+        <div class="cardionexus-info">CARDIONEXUS</div>
+        <img src="/static/Doc.png" alt="Doctor Image" />
+      </div>
+    </div>
+
+    <!-- <script>
+      document.getElementById("loginForm").onsubmit = function (event) {
+        event.preventDefault();
+        var role = document.getElementById("role").value;
+        var name = document.getElementById("text").value; // Get the actual username
+
+        // Store user details in localStorage
+        localStorage.setItem("userName", name);
+
+        if (role === "lab-technician") {
+          window.location.href = "Lab_tec login.html";
+        } else if (role === "doctor") {
+          window.location.href = "doc4.html";
+        }
+      };
+    </script> -->
+  </body>
+</html>
